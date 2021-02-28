@@ -21,9 +21,7 @@ public class Product {
 	@Column(unique=true)
 	private String barCode;
 	private String image;
-	
-	@ManyToOne
-	private Category cat;
+
 
 	public int getId() {
 		return id;
@@ -89,14 +87,7 @@ public class Product {
 		this.image = image;
 	}
 
-	public Category getCat() {
-		return cat;
-	}
 
-	public void setCat(Category cat) {
-		this.cat = cat;
-	}
-	
 	
 
 }

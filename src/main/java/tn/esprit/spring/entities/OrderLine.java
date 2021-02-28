@@ -14,16 +14,16 @@ public class OrderLine {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int quantity;
-	private int etat;
+	private int etat = 0;
 	private int linePrice;
 	
 	@ManyToOne
-	@JoinColumn(name="prod_id", referencedColumnName="id")
+	@JoinColumn(name="prod_id", referencedColumnName="id",insertable = false, updatable = false)
 	private Product products;
 	
 	@ManyToOne
-	@JoinColumn(name="order_id", referencedColumnName="id")
-	private Order orderr;
+	@JoinColumn(name="order_id", referencedColumnName="id",insertable = false, updatable = false)
+	private Orders orders;
 
 	public int getId() {
 		return id;
@@ -65,12 +65,18 @@ public class OrderLine {
 		this.products = products;
 	}
 
-	public Order getOrderr() {
-		return orderr;
+	public Orders getOrderr() {
+		return orders;
 	}
 
-	public void setOrderr(Order orderr) {
-		this.orderr = orderr;
+	public void setOrderr(Orders orders) {
+		this.orders = orders;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderLine [quantity=" + quantity + ", etat=" + etat + ", linePrice=" + linePrice + ", products="
+				+ products + "]";
 	}
 	
 	

@@ -17,13 +17,11 @@ public class Invoice {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
 	@Temporal(TemporalType.DATE)
 	private Date date;
-
 	@OneToOne
 	@JoinColumn(name="order_id", referencedColumnName="id")
-	private Order orderr;
+	private Orders orderr;
 
 	public int getId() {
 		return id;
@@ -41,11 +39,11 @@ public class Invoice {
 		this.date = date;
 	}
 
-	public Order getOrderr() {
+	public Orders getOrderr() {
 		return orderr;
 	}
 
-	public void setOrderr(Order orderr) {
+	public void setOrderr(Orders orderr) {
 		this.orderr = orderr;
 	}
 	

@@ -29,18 +29,9 @@ public class User {
 	private String password;
 	private long tel;
 	private float salary;
-	@Enumerated(EnumType.STRING)
-	private Role role;
 	@OneToMany(mappedBy="userr", fetch=FetchType.EAGER)
-	private List<Order> orders;
-	@OneToMany(mappedBy="userr")
-	private List<Delivery> deliveries;
-	@OneToMany(mappedBy="userr")
-	private List<Complaint> complaints;
-	@ManyToOne
-	private Event evenement;
-	@OneToMany(mappedBy="userr")
-	private List<Subject> subjects;
+	private List<Orders> orders;
+
 	public int getId() {
 		return id;
 	}
@@ -94,42 +85,6 @@ public class User {
 	}
 	public void setSalary(float salary) {
 		this.salary = salary;
-	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
-	public List<Order> getOrders() {
-		return orders;
-	}
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-	public List<Delivery> getDeliveries() {
-		return deliveries;
-	}
-	public void setDeliveries(List<Delivery> deliveries) {
-		this.deliveries = deliveries;
-	}
-	public List<Complaint> getComplaints() {
-		return complaints;
-	}
-	public void setComplaints(List<Complaint> complaints) {
-		this.complaints = complaints;
-	}
-	public Event getEvenement() {
-		return evenement;
-	}
-	public void setEvenement(Event evenement) {
-		this.evenement = evenement;
-	}
-	public List<Subject> getSubjects() {
-		return subjects;
-	}
-	public void setSubjects(List<Subject> subjects) {
-		this.subjects = subjects;
 	}
 	
 	
