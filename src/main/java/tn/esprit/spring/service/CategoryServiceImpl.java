@@ -60,8 +60,8 @@ public class CategoryServiceImpl implements ICategoryService{
 
 	/**************Creating getByid method that retrieve category detail from database************/
 	@Override
-	public Category retrieveCategoryById(String id) {
-		Category cat = categoryRepository.findById(Integer.parseInt(id)).orElse(null);
+	public Category retrieveCategoryById(int id) {
+		Category cat = categoryRepository.findById(id).orElse(null);
 		l.info("Category updated: \n" + cat);
 		return cat;
 	}

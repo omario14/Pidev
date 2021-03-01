@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Product {
 	
@@ -22,6 +24,7 @@ public class Product {
 	private String barCode;
 	private String image;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Category cat;
 	
@@ -31,7 +34,6 @@ public class Product {
 
 	public Product(String label, float price, int quantity, String description, float weight, String barCode,
 			String image) {
-		super();
 		this.label = label;
 		this.price = price;
 		this.quantity = quantity;
@@ -41,18 +43,6 @@ public class Product {
 		this.image = image;
 	}
 
-	public Product(String label, float price, int quantity, String description, float weight, String barCode,
-			String image, Category cat) {
-		super();
-		this.label = label;
-		this.price = price;
-		this.quantity = quantity;
-		this.description = description;
-		this.weight = weight;
-		this.barCode = barCode;
-		this.image = image;
-		this.cat = cat;
-	}
 
 	public int getId() {
 		return id;

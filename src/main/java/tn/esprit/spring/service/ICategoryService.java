@@ -12,7 +12,7 @@ public interface ICategoryService {
 	public void deleteCategory(int id);
 	public void updateCategory(Category c,int idCategory);
 	public List<Category> retrieveAllCategories();
-	public Category retrieveCategoryById (String id);
+	public Category retrieveCategoryById (int id);
 	public Category findCategoryByName(String name);
 	public void affecterCategoryProduct(int idp,int idc);
 
