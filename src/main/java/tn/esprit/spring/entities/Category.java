@@ -15,13 +15,22 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String labelCat;
-	private String mark;
 	
 	@OneToMany(mappedBy="cat")
 	private List<Product> products;
 	
 	@OneToMany(mappedBy="cat")
 	private List<Publicity> pubs;
+	
+	
+	public Category() {
+		
+	}
+
+	public Category(String labelCat) {
+		super();
+		this.labelCat = labelCat;
+	}
 
 	public int getId() {
 		return id;
@@ -39,13 +48,9 @@ public class Category {
 		this.labelCat = labelCat;
 	}
 
-	public String getMark() {
-		return mark;
-	}
+	
 
-	public void setMark(String mark) {
-		this.mark = mark;
-	}
+	
 
 	public List<Product> getProducts() {
 		return products;
