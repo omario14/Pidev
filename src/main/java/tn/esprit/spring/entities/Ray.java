@@ -18,6 +18,16 @@ public class Ray {
 	
 	@OneToMany
 	private List<Category> category;
+	
+	public Ray() {
+		
+	}
+
+	public Ray(String type, List<Category> category) {
+		super();
+		this.type = type;
+		this.category = category;
+	}
 
 	public int getId() {
 		return id;
