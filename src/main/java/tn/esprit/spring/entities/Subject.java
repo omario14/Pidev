@@ -1,19 +1,25 @@
 package tn.esprit.spring.entities;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
-public class Subject {
+public class Subject implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,10 +28,25 @@ public class Subject {
 	private String description;
 	@Temporal(TemporalType.DATE)
 	private Date date;
-	@ManyToOne
-	private User userr;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId", referencedColumnName = "id")
+	private User user;
 	@OneToMany(mappedBy="sub")
-	private List<Comment> comments;
+	private Set<Comment> comments;
+	
+	
+	public Subject() {
+		super();
+	}
+	public Subject(int id, String title, String description, Date date, User user) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.date = date;
+		this.user = user;
+	}
 	public int getId() {
 		return id;
 	}
@@ -50,18 +71,19 @@ public class Subject {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public User getUserr() {
-		return userr;
+	public User getUser() {
+		return user;
 	}
-	public void setUserr(User userr) {
-		this.userr = userr;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public List<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
-	public void setComments(List<Comment> comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
+	
 	
 	
 
