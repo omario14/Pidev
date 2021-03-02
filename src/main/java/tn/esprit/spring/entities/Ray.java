@@ -16,7 +16,7 @@ public class Ray {
 	private int id;
 	private String type;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "ray")
 	private List<Category> category;
 	
 	public Ray() {
@@ -53,5 +53,7 @@ public class Ray {
 		this.category = category;
 	}
 
+	
+	
 	
 }

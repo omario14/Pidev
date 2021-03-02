@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,6 +22,9 @@ public class Category {
 	
 	@OneToMany(mappedBy="cat")
 	private List<Publicity> pubs;
+	
+	@ManyToOne
+	private Ray ray;
 	
 	
 	public Category() {
@@ -66,6 +70,14 @@ public class Category {
 
 	public void setPubs(List<Publicity> pubs) {
 		this.pubs = pubs;
+	}
+
+	public Ray getRay() {
+		return ray;
+	}
+
+	public void setRay(Ray ray) {
+		this.ray = ray;
 	}
 	
 	

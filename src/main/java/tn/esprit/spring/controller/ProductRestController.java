@@ -38,10 +38,10 @@ public class ProductRestController {
 	//creating put mapping that updates the product detail  
 	 @PutMapping("/update-product/{idProduct}")
 	 @ResponseBody
-		public ResponseEntity<String> updateProduct(
+		public int updateProduct(
 			@RequestBody Product product,@PathVariable("idProduct")int idProduct) {
 		    ProductService.updateProduct(product,idProduct);
-		    return new ResponseEntity<String>("Product updated successfully",HttpStatus.OK);
+		    return product.getId();
 			
 		}
 	  //creating a delete mapping that delete data from database
