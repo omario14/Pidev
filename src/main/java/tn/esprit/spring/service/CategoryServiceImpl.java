@@ -62,6 +62,7 @@ public class CategoryServiceImpl implements ICategoryService{
 	@Override
 	public Category retrieveCategoryById(int id) {
 		Category cat = categoryRepository.findById(id).orElse(null);
+
 		l.info("Category updated: \n" + cat);
 		return cat;
 	}
