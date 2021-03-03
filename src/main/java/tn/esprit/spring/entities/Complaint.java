@@ -12,7 +12,8 @@ public class Complaint {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private Decision decComplaint;
+	
+	private String decComplaint;
 	private String Email;
 	private String description;
 	@ManyToOne
@@ -24,12 +25,7 @@ public class Complaint {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Decision getDecComplaint() {
-		return decComplaint;
-	}
-	public void setDecComplaint(Decision decComplaint) {
-		this.decComplaint = decComplaint;
-	}
+	
 	public String getEmail() {
 		return Email;
 	}
@@ -47,6 +43,12 @@ public class Complaint {
 	}
 	public void setUserr(User userr) {
 		this.userr = userr;
+	}
+	public String getDecComplaint() {
+		return decComplaint;
+	}
+	public void setDecComplaint(String decComplaint) {
+		this.decComplaint = decComplaint;
 	}
 	
 	
