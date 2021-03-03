@@ -31,7 +31,7 @@ public class OrderlineController implements IOrderlineService {
 	@GetMapping("/add/orderline/{prodid}/{amount}/{price}")
 	@ResponseBody
 	public void addOrderline(@PathVariable("prodid") int prodid,@PathVariable("amount")  int amount,@PathVariable("price")  float price) {
-		ue.addOrderline(prodid, amount, price);
+		ue.addOrderline(prodid, amount, price*amount);
 		
 	}
 
@@ -51,4 +51,7 @@ public class OrderlineController implements IOrderlineService {
 		return ue.getOrderline();
 		
 	}
+
+
+	
 }

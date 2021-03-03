@@ -29,4 +29,7 @@ public interface IOrderlineRepository extends CrudRepository<OrderLine, Integer>
 	@Query(value ="SELECT x.label ,c.line_price , c.quantity FROM order_line c JOIN product x where x.id=c.prod_id", nativeQuery = true)
 	List<String> getOrderline();
 
+
+	@Query(value ="SELECT sum(line_price)FROM order_line", nativeQuery = true)
+	public float total();
 }

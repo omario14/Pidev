@@ -39,4 +39,9 @@ public class OrderlineService implements IOrderlineService {
 		
 	}
 
+	
+	public float totale() {
+		 return orderlineRepository.total();
+	}
+
 }
