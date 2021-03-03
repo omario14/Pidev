@@ -32,7 +32,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	@OneToMany(mappedBy="userr", fetch=FetchType.EAGER)
-	private List<Order> orders;
+	private List<Orders> orders;
 	@OneToMany(mappedBy="userr")
 	private List<Delivery> deliveries;
 	@OneToMany(mappedBy="userr")
@@ -40,7 +40,7 @@ public class User {
 	@ManyToOne
 	private Event evenement;
 	@OneToMany(mappedBy="userr")
-	private List<Subject> subjects;
+	//private List<Subject> subjects;
 	public int getId() {
 		return id;
 	}
@@ -101,10 +101,10 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	public List<Order> getOrders() {
+	public List<Orders> getOrders() {
 		return orders;
 	}
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<Orders> orders) {
 		this.orders = orders;
 	}
 	public List<Delivery> getDeliveries() {
@@ -125,12 +125,12 @@ public class User {
 	public void setEvenement(Event evenement) {
 		this.evenement = evenement;
 	}
-	public List<Subject> getSubjects() {
+	/*public List<Subject> getSubjects() {
 		return subjects;
 	}
 	public void setSubjects(List<Subject> subjects) {
 		this.subjects = subjects;
-	}
+	}*/
 	
 	
 	

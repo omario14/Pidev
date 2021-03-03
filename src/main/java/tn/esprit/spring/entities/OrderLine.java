@@ -23,7 +23,7 @@ public class OrderLine {
 	
 	@ManyToOne
 	@JoinColumn(name="order_id", referencedColumnName="id")
-	private Order orderr;
+	private Orders orderr;
 
 	public int getId() {
 		return id;
@@ -65,11 +65,11 @@ public class OrderLine {
 		this.products = products;
 	}
 
-	public Order getOrderr() {
+	public Orders getOrderr() {
 		return orderr;
 	}
 
-	public void setOrderr(Order orderr) {
+	public void setOrderr(Orders orderr) {
 		this.orderr = orderr;
 	}
 	

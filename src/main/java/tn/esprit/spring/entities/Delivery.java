@@ -25,7 +25,7 @@ public class Delivery {
 	@ManyToOne
 	private User userr;
 	@OneToMany
-	private List<Order> orders;
+	private List<Orders> orders;
 	@ManyToOne
 	private DeliveryMan delMan;
 	public int getId() {
@@ -52,10 +52,10 @@ public class Delivery {
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
-	public List<Order> getOrders() {
+	public List<Orders> getOrders() {
 		return orders;
 	}
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<Orders> orders) {
 		this.orders = orders;
 	}
 	public DeliveryMan getDelMan() {
