@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.Category;
-import tn.esprit.spring.entities.Product;
 import tn.esprit.spring.entities.Ray;
 import tn.esprit.spring.repository.CategoryRepository;
 import tn.esprit.spring.repository.RayRepository;

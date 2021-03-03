@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 	
@@ -23,6 +25,7 @@ public class Category {
 	@OneToMany(mappedBy="cat")
 	private List<Publicity> pubs;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Ray ray;
 	
