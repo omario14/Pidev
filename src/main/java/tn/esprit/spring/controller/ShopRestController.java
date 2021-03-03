@@ -44,4 +44,11 @@ public class ShopRestController {
 			shopService.affecterShopRay(idr, ids);
 			return "Ray affected to Shop successfully!!";
 		}
+  	
+  	@PutMapping("/disaffecter-shop-ray/{idr}")
+	@ResponseBody
+		public String disaffectShopRay(@PathVariable("idr")int idr) {
+		shopService.disaffectShopRay(idr);
+		return "Ray disaffected from Shop successfully!!";
+	}
 }

@@ -36,4 +36,11 @@ public class ShopServiceImpl implements IShopService{
 		
 	}
 
+	@Override
+	public void disaffectShopRay(int idr) {
+		shopRepository.disaffectShopRay(idr);
+		
+		
+	}
+
 }
