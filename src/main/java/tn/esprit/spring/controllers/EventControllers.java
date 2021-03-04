@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.esprit.spring.entities.DeliveryMan;
 import tn.esprit.spring.entities.Event;
 import tn.esprit.spring.services.IEventServices;
 
