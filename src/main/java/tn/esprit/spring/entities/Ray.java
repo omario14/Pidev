@@ -18,7 +18,7 @@ public class Ray {
 	private String type;
 	
 	@OneToMany(mappedBy = "ray")
-	private List<Category> category;
+	private List<Product> product;
 	
 	@ManyToOne
 	private Shop shop;
@@ -39,17 +39,17 @@ public class Ray {
 	
 	
 
-	public Ray(String type, List<Category> category, Shop shop) {
+	public Ray(String type, List<Product> product, Shop shop) {
 		super();
 		this.type = type;
-		this.category = category;
+		this.product = product;
 		this.shop = shop;
 	}
 
-	public Ray(String type, List<Category> category) {
+	public Ray(String type, List<Product> product) {
 		super();
 		this.type = type;
-		this.category = category;
+		this.product = product;
 	}
 
 	public int getId() {
@@ -68,12 +68,12 @@ public class Ray {
 		this.type = type;
 	}
 
-	public List<Category> getCategory() {
-		return category;
+	public List<Product> getProduct() {
+		return product;
 	}
 
-	public void setCategory(List<Category> category) {
-		this.category = category;
+	public void setProduct(List<Product> product) {
+		this.product = product;
 	}
 
 	

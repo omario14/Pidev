@@ -14,7 +14,7 @@ public interface IRayService  {
 	public void updateRay(Ray r,int idRay);
 	public List<Ray> retrieveAllRays();
 	public Ray retrieveRayById (int id);
-	public Ray findRayByName(String name);
-	public void affecterRayCategory(int idc,int idr);
+	public Ray findRayByName(String name);	
+	public void affecterRayProduct(int idp, int idr);
 
 }

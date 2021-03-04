@@ -28,6 +28,10 @@ public class Product {
 	@ManyToOne
 	private Category cat;
 	
+	@JsonIgnore
+	@ManyToOne
+	private Ray ray;
+	
 	public Product() {
 		
 	}
@@ -132,6 +136,14 @@ public class Product {
 
 	public void setCat(Category cat) {
 		this.cat = cat;
+	}
+
+	public Ray getRay() {
+		return ray;
+	}
+
+	public void setRay(Ray ray) {
+		this.ray = ray;
 	}
 	
 	

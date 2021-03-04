@@ -7,9 +7,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.entities.Category;
+import tn.esprit.spring.entities.Product;
 import tn.esprit.spring.entities.Ray;
-import tn.esprit.spring.repository.CategoryRepository;
+import tn.esprit.spring.repository.ProductRepository;
 import tn.esprit.spring.repository.RayRepository;
 
 @Service
@@ -19,7 +19,7 @@ public class RayServiceImpl implements IRayService {
 	RayRepository rayRepository;
 	
 	@Autowired
-	CategoryRepository categoryRepository;
+	ProductRepository productRepository;
 	
 	private static final Logger l = LogManager.getLogger(ProductServiceImpl.class);
 
@@ -71,11 +71,11 @@ public class RayServiceImpl implements IRayService {
 
 	/**************Creating affecterRayCategory method that affect category to Ray ************/
 	@Override
-	public void affecterRayCategory(int idc, int idr) {
+	public void affecterRayProduct(int idp, int idr) {
 		Ray ra = rayRepository.findById(idr).get();
-        Category cat = categoryRepository.findById(idc).get();
-		cat.setRay(ra);
-		categoryRepository.save(cat);
+        Product prod = productRepository.findById(idp).get();
+		prod.setRay(ra);
+		productRepository.save(prod);
 		
 	}
 
