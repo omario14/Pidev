@@ -80,11 +80,10 @@ public class RayRestController {
   				return rayService.findRayByName(name);
   			}
   		 
-  		@PutMapping("/affecter-ray-produit/{idp}/{idr}")
+  		@PutMapping("/affecter-ray-product/{idp}/{idr}/{qut}")
   		@ResponseBody
-  			public String affectRayProduct(@PathVariable("idp")int idp, @PathVariable("idr")int idr) {
-  			rayService.affecterRayProduct(idp, idr);
-  			return "Product affected to Ray successfully!!";
+  			public void affectRayProduct(@PathVariable("idp")int idp, @PathVariable("idr")int idr,@PathVariable("qut")int qut) {
+  			rayService.affecterRayProduct(idp, idr,qut);
   		}
   		
 }

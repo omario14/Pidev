@@ -1,17 +1,27 @@
 package tn.esprit.spring.entities;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Product {
+public class Product implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -22,7 +32,16 @@ public class Product {
 	private float weight;
 	@Column(unique=true)
 	private String barCode;
+	@Lob
 	private String image;
+	private int quantityPerRay;
+	
+	@Temporal(TemporalType.DATE)
+	private Date expirationDate;
+	
+	
+	
+	
 	
 	@JsonIgnore
 	@ManyToOne
@@ -35,9 +54,28 @@ public class Product {
 	public Product() {
 		
 	}
+	
+	
 
 	public Product(String label, float price, int quantity, String description, float weight, String barCode,
-			String image) {
+			String image, int quantityPerRay, Category cat, Ray ray) {
+		super();
+		this.label = label;
+		this.price = price;
+		this.quantity = quantity;
+		this.description = description;
+		this.weight = weight;
+		this.barCode = barCode;
+		this.image = image;
+		this.quantityPerRay = quantityPerRay;
+		this.cat = cat;
+		this.ray = ray;
+	}
+
+
+
+	public Product(String label, float price, int quantity, String description, float weight, String barCode,
+			String image,Date expirationDate) {
 
 
 		super();
@@ -49,6 +87,7 @@ public class Product {
 		this.weight = weight;
 		this.barCode = barCode;
 		this.image = image;
+		this.expirationDate=expirationDate;
 	}
 
 
@@ -144,6 +183,30 @@ public class Product {
 
 	public void setRay(Ray ray) {
 		this.ray = ray;
+	}
+
+
+
+	public int getQuantityPerRay() {
+		return quantityPerRay;
+	}
+
+
+
+	public void setQuantityPerRay(int quantityPerRay) {
+		this.quantityPerRay = quantityPerRay;
+	}
+
+
+
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+
+
+
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
 	}
 	
 	

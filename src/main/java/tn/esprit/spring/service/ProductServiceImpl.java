@@ -16,9 +16,25 @@ public class ProductServiceImpl implements IProductService{
 	ProductRepository ProductRepository;
 	/**********************Creating add method that insert product into database***************/
 	@Override
-	public int addProduct(Product product) {
-		ProductRepository.save(product);
-		return product.getId();
+	public int addProduct(Product p) {
+		/*Product p=new Product();
+		String fileName=StringUtils.cleanPath(file.getOriginalFilename());
+		if(fileName.contains("..")) {
+			System.out.println("not a valid file");
+		}
+		try {
+			p.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		p.setLabel(label);
+		p.setPrice(price);
+		p.setQuantity(quantity);
+		p.setDescription(description);
+		p.setWeight(weight);
+		p.setBarCode(barCode);*/
+		ProductRepository.save(p);
+		return p.getId();
 	}
 	/****************Creating update method that upgrade product from database*****************/ 
     @Override

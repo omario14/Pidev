@@ -10,7 +10,7 @@ import tn.esprit.spring.entities.Product;
 public interface IProductService {
 
 	/**********************Creating add method that insert product into database***************/
-	int addProduct(Product product);
+	int addProduct(Product p);
 
 	/****************Creating update method that upgrade product from database*****************/
 	void updateProduct(Product p, int idProduct);

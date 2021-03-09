@@ -15,6 +15,6 @@ public interface IRayService  {
 	public List<Ray> retrieveAllRays();
 	public Ray retrieveRayById (int id);
 	public Ray findRayByName(String name);	
-	public void affecterRayProduct(int idp, int idr);
+	public void affecterRayProduct(int idp, int idr,int qut);
 
 }

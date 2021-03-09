@@ -3,6 +3,7 @@ package tn.esprit.spring.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +28,43 @@ public class ProductRestController {
 	@Autowired
 	 IProductService ProductService;
 	
+	/*private static String UPLOAD_DIR = "uploads";
+	
+	@RequestMapping(value="upload",method = RequestMethod.POST)
+	public String upload (@RequestParam("file")MultipartFile file,HttpServletRequest request) {
+	try {
+		String fileName=file.getOriginalFilename();
+		String path = request.getServletContext().getRealPath("")+ UPLOAD_DIR + File.separator +fileName;
+		saveFile(file.getInputStream(), path);
+		return fileName;
+	} catch (Exception e) {
+		return e.getMessage();
+	}	
+		
+	}
+	private void saveFile(InputStream inputStream,String path) {
+		try {
+			OutputStream outputStream = new FileOutputStream(new File(path));
+			int read = 0;
+			byte [] bytes =new byte[2048];
+			
+			while ((read=inputStream.read(bytes)) != -1) {
+				outputStream.write(bytes, 0, read);
+				
+			}
+			outputStream.flush();
+			outputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}*/
+	
 	//creating post mapping method that insert product into database
 	 @PostMapping("/add-product")
 	 @ResponseBody
 	 public int addProduct(@RequestBody Product p) {
 		    ProductService.addProduct(p);
+		    
 			return p.getId();
 			
 		}
