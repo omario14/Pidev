@@ -15,13 +15,18 @@ import javax.persistence.TemporalType;
 @Entity
 public class Delivery {
 	
+	public enum StateDelivery {
+		IN_PROGRESS, 
+		Approved;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private float price;
 	@Temporal(TemporalType.DATE)
 	private Date dateDel;
-	private int etat;
+	private StateDelivery etat;
 	@ManyToOne
 	private User userr;
 	@OneToMany
@@ -30,6 +35,16 @@ public class Delivery {
 	private DeliveryMan delMan;
 	public int getId() {
 		return id;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -46,11 +61,18 @@ public class Delivery {
 	public void setDateDel(Date dateDel) {
 		this.dateDel = dateDel;
 	}
-	public int getEtat() {
+	
+	public StateDelivery getEtat() {
 		return etat;
 	}
-	public void setEtat(int etat) {
+	public void setEtat(StateDelivery etat) {
 		this.etat = etat;
+	}
+	public User getUserr() {
+		return userr;
+	}
+	public void setUserr(User userr) {
+		this.userr = userr;
 	}
 	public List<Orders> getOrders() {
 		return orders;

@@ -11,6 +11,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class DeliveryMan {
+	public enum StateLivreur {
+		Active, InActive;
+	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,8 +28,21 @@ public class DeliveryMan {
 	private float salary;
 	private int deliveryNbre;
 	
+	private StateLivreur stateLivreur;
+	
 	@OneToMany(mappedBy="delMan")
 	private List<Delivery> deliveries;
+	
+	
+	
+
+	public StateLivreur getStateLivreur() {
+		return stateLivreur;
+	}
+
+	public void setStateLivreur(StateLivreur stateLivreur) {
+		this.stateLivreur = stateLivreur;
+	}
 
 	public int getId() {
 		return id;
