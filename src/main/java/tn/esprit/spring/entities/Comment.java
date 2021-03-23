@@ -13,13 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import net.minidev.json.annotate.JsonIgnore;
 
 
 
 @Entity
 public class Comment implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -27,7 +30,7 @@ public class Comment implements Serializable{
 	private String description;
 	@Temporal(TemporalType.DATE)
 	private Date date;
-	@JsonIgnore
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="subjectId", referencedColumnName="id")
 	private Subject sub;

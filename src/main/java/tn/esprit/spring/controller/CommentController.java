@@ -1,5 +1,9 @@
 package tn.esprit.spring.controller;
 
+import java.io.IOException;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entities.Comment;
 import tn.esprit.spring.entities.Subject;
+import tn.esprit.spring.repository.SubjectRepository;
 import tn.esprit.spring.service.CommentService;
 
 @RestController
@@ -23,12 +28,24 @@ public class CommentController {
 	
 	@Autowired
 	CommentService commentService;
+	@Autowired
+	SubjectRepository subjectRepository;
+	
+	
+
+	@PostMapping("/addComment/{idSubject}/{idUser}")
+	public void addComment(@RequestBody Comment comment, @PathVariable int idUser, @PathVariable int idSubject) throws IOException
+	{		  	
+		commentService.addCommentToSubject(comment, idSubject, idUser);	
+		System.out.println();
+							
+	}
 	
 	@PostMapping("/addComment")
 	public int ajouterComment(@RequestBody Comment c) {
 		return commentService.ajouterComment(c);
 	}
-	
+
 	@DeleteMapping("/deleteComment/{idComment}")
   	@ResponseBody
   	public ResponseEntity<String> deleteComment(

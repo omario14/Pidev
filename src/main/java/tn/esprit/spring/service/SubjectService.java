@@ -30,13 +30,13 @@ public class SubjectService {
 		return subjectRepository.save(s).getId();
 	}
 	
-	/*public void affecterCommentASubject(int commentId, int subjectId) {
+	public void affecterCommentASubject(int commentId, int subjectId) {
 		Comment comment = commentRepository.findById(commentId).get();
 		Subject subject = subjectRepository.findById(subjectId).get();
 		if (ObjectUtils.isEmpty(comment) && !ObjectUtils.isEmpty(subject))
 			subject.getComments().add(comment);
 			//departement.getEmploye().add(employe);
-	}*/
+	}
 	
 	public void deleteSubject(int id) {
 		subjectRepository.deleteById(id);

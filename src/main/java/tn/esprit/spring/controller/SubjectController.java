@@ -31,12 +31,12 @@ public class SubjectController {
 		return subjectService.ajouterSubject(s);
 	}
 	
-	/*@PutMapping(value = "/affecterCommentASubject/{idcom}/{iddept}")
+	@PutMapping(value = "/affecterCommentASubject/{idcom}/{idsub}")
 	public void affecterCommentASubject(@PathVariable("idcom") int commentId, @PathVariable("idsub") int subjectId) {
 		subjectService.affecterCommentASubject(commentId, subjectId);
 		//employeService.affecterEmployeADepartement(employeId, depId);
 
-	}*/
+	}
 	
 	@GetMapping("/getAllSubjects")
   	@ResponseBody

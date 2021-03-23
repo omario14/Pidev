@@ -26,7 +26,7 @@ public class Subject implements Serializable {
 	private String description;
 	@Temporal(TemporalType.DATE)
 	private Date date;
-	
+	private Integer voteCount = 0;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
@@ -80,6 +80,12 @@ public class Subject implements Serializable {
 	}
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+	public Integer getVoteCount() {
+		return voteCount;
+	}
+	public void setVoteCount(Integer voteCount) {
+		this.voteCount = voteCount;
 	}
 	
 	

@@ -7,13 +7,20 @@ import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.Comment;
 import tn.esprit.spring.entities.Subject;
-import tn.esprit.spring.repository.CommentRepository;;
+import tn.esprit.spring.entities.User;
+import tn.esprit.spring.repository.CommentRepository;
+import tn.esprit.spring.repository.SubjectRepository;
+import tn.esprit.spring.repository.UserRepository;;
 
 @Service
 public class CommentService {
 	
 	@Autowired
 	CommentRepository commentRepository;
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	SubjectRepository subjectRepository;
 	
 	//private static final Logger l = LogManager.getLogger(CommentService.class);
 	
@@ -35,5 +42,17 @@ public class CommentService {
 
 	public Comment findCommentBySubject(Subject subject) {
 		return commentRepository.findCommentBySubject(subject);		
+	}
+	
+	public void addCommentToSubject(Comment comment,int idSubject, int idUser) {
+		
+		Subject subject = subjectRepository.findById(idSubject).get();
+		
+		User user = userRepository.findById(idUser).get();
+		
+		comment.setSub(subject);
+		comment.setUser(user);
+		
+		commentRepository.save(comment);		
 	}
 }
