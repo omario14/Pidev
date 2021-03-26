@@ -1,11 +1,12 @@
 package tn.esprit.spring.Service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.esprit.spring.dto.cart.CartDto;
 import tn.esprit.spring.entities.Coupon;
 import tn.esprit.spring.entities.User;
 import tn.esprit.spring.repository.CouponRepository;
@@ -95,5 +96,9 @@ public class CouponService {
 
 		cp.setAmount(amount);
 
+	}
+	public List<String> listCoupon() {
+		List<String> cpList = couponRepository.getall();
+		return cpList;
 	}
 }
