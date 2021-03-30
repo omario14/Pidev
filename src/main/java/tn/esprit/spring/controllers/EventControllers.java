@@ -1,5 +1,6 @@
 package tn.esprit.spring.controllers;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,9 @@ public class EventControllers {
 			return Elist;
 			}
 		// http://localhost:8081/SpringMVC/servlet/addEvent
-		@PostMapping("/Event")
+		@PostMapping("/addEvent")
 		public Event addEvent(@RequestBody Event E) {
+			
 			Event Ev = eService.addEvent(E);
 			return Ev ;
 	}
@@ -43,5 +45,5 @@ public class EventControllers {
 			return eService.updateEvent(E);
 		}
 
-
+		
 }

@@ -8,12 +8,16 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Complaint {
+	public enum decision {
+		Remboursement,Echange,Réparation
+	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	private String decComplaint;
+	private decision decComplaint;
+	private int DeliveryId;
 	private String Email;
 	private String description;
 	@ManyToOne
@@ -44,11 +48,17 @@ public class Complaint {
 	public void setUserr(User userr) {
 		this.userr = userr;
 	}
-	public String getDecComplaint() {
+	public decision getDecComplaint() {
 		return decComplaint;
 	}
-	public void setDecComplaint(String decComplaint) {
+	public void setDecComplaint(decision decComplaint) {
 		this.decComplaint = decComplaint;
+	}
+	public int getDeliveryId() {
+		return DeliveryId;
+	}
+	public void setDeliveryId(int deliveryId) {
+		DeliveryId = deliveryId;
 	}
 	
 	

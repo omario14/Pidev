@@ -26,25 +26,26 @@ public class Delivery {
 	private float price;
 	@Temporal(TemporalType.DATE)
 	private Date dateDel;
+	private String address ;
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	private StateDelivery etat;
-	@ManyToOne
-	private User userr;
+	
+	
+	private int userr;
+	
 	@OneToMany
 	private List<Orders> orders;
 	@ManyToOne
 	private DeliveryMan delMan;
+	
 	public int getId() {
 		return id;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -68,16 +69,19 @@ public class Delivery {
 	public void setEtat(StateDelivery etat) {
 		this.etat = etat;
 	}
-	public User getUserr() {
+	
+	public int getUserr() {
 		return userr;
 	}
-	public void setUserr(User userr) {
+	public void setUserr(int userr) {
 		this.userr = userr;
 	}
+	
 	public List<Orders> getOrders() {
 		return orders;
 	}
 	public void setOrders(List<Orders> orders) {
+		
 		this.orders = orders;
 	}
 	public DeliveryMan getDelMan() {

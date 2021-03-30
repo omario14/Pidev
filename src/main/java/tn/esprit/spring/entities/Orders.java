@@ -20,8 +20,7 @@ public class Orders {
 	private Date date;
 	private float totPrice;
 	private String Adress;
-	@ManyToOne
-	private User userr;
+	private int userr;
 	
 	public int getId() {
 		return id;
@@ -47,10 +46,10 @@ public class Orders {
 	public void setAdress(String adress) {
 		Adress = adress;
 	}
-	public User getUserr() {
+	public int getUserr() {
 		return userr;
 	}
-	public void setUserr(User userr) {
+	public void setUserr(int userr) {
 		this.userr = userr;
 	}
 	

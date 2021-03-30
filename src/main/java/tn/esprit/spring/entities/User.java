@@ -13,8 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 public class User {
+	public enum Role {
+		SuperAdmin, Admin, Client, DeliveryMan 
+
+	}
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,7 +34,9 @@ public class User {
 	@Column(unique=true)
 	private String userName;
 	private String password;
+	
 	private long tel;
+	
 	private float salary;
 	@Enumerated(EnumType.STRING)
 	private Role role;
