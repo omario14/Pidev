@@ -23,42 +23,39 @@ import tn.esprit.spring.service.IProductService;
 @RestController
 @RequestMapping("/product")
 public class ProductRestController {
+	
+	
 
+	
+	
 	
 	@Autowired
 	 IProductService ProductService;
 	
-	/*private static String UPLOAD_DIR = "uploads";
 	
-	@RequestMapping(value="upload",method = RequestMethod.POST)
-	public String upload (@RequestParam("file")MultipartFile file,HttpServletRequest request) {
-	try {
-		String fileName=file.getOriginalFilename();
-		String path = request.getServletContext().getRealPath("")+ UPLOAD_DIR + File.separator +fileName;
-		saveFile(file.getInputStream(), path);
-		return fileName;
-	} catch (Exception e) {
-		return e.getMessage();
-	}	
-		
-	}
-	private void saveFile(InputStream inputStream,String path) {
-		try {
-			OutputStream outputStream = new FileOutputStream(new File(path));
-			int read = 0;
-			byte [] bytes =new byte[2048];
-			
-			while ((read=inputStream.read(bytes)) != -1) {
-				outputStream.write(bytes, 0, read);
-				
-			}
-			outputStream.flush();
-			outputStream.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
-	
+	/* @PostMapping("/file")
+	    @ResponseBody
+	    public Product  uploddimg (@RequestParam("file") @Nullable MultipartFile file , @RequestParam("id") int id ) {
+	        Product product =ProductService.getProductById(id);
+	        if(file==null) {
+	            product.setImage("defaultPic.jpg");
+	            ProductService.addProduct(product);
+	        }else {
+	            try { 
+	                File f = new File("C:\\upload\\" +"image" + id+file.getOriginalFilename());
+	                file.transferTo(f);
+	                product.setImage("image"+id+file.getOriginalFilename());
+	                ProductService.addProduct(product);
+	            } catch (IllegalStateException e) {
+              e.printStackTrace();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+
+	        return(product);
+	    }
+	*/
 	//creating post mapping method that insert product into database
 	 @PostMapping("/add-product")
 	 @ResponseBody
@@ -87,15 +84,25 @@ public class ProductRestController {
 			
 		}
 		//creating a get mapping that retrieves all the product detail from the database   
-		@GetMapping("/get-all-product")
+		@GetMapping("/get-all-product/{keyword}")
 		@ResponseBody
-		public List<Product>  getAllProduct() {
+		public List<Product>  getAllProduct(@PathVariable("keyword")String keyword) {
 			List<Product> product = new ArrayList<>();
-			for(Product p : ProductService.getAllProducts()) {
+			for(Product p : ProductService.getAllProducts(keyword)) {
 				product.add(p);
 			}
 			return product;
 		}
+		//creating a get mapping that retrieves all the product detail from the database   
+				@GetMapping("/get-all-product/{pageNo}/{pageSize}")
+				@ResponseBody
+				public List<Product>  getAllProduct(@PathVariable int pageNo,@PathVariable int pageSize) {
+					List<Product> product = new ArrayList<>();
+					for(Product p : ProductService.getAllProducts(pageNo,pageSize)) {
+						product.add(p);
+					}
+					return product;
+				}
 		//creating a get mapping that retrieves a specific product
 		@GetMapping("/get-productbyId/{idp}")
 		@ResponseBody
@@ -110,6 +117,17 @@ public class ProductRestController {
 		public List<Product> getProductById(@PathVariable("category")String categoryName) {
 			
 			return ProductService.getProductsByCategory(categoryName);
+		}
+		@GetMapping(value = "getCategoryByProduct/{idp}")
+		public int findCategoryByProduct(@PathVariable("idp")int idp) {
+		return ProductService.findCategoryByProduct(idp);
+		}
+		
+		@GetMapping("/get-all-productSorted")
+		@ResponseBody
+		public List<Product>  getAllProductsSorted() {
+			
+			return ProductService.getAllProductsByPopularity();
 		}
 		 
 		

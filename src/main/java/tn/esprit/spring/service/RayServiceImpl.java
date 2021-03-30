@@ -90,7 +90,7 @@ public class RayServiceImpl implements IRayService {
     		prod.setQuantityPerRay(prod.getQuantityPerRay()+qut);
     		prod.setQuantity(prod.getQuantity()-qut);
     		productRepository.save(prod);
-    		l.info("done");
+    		System.out.print("done");
     		if (prod.getQuantity()<=10) {
     			//Create Email Sender
     			JavaMailSenderImpl mailsender = new JavaMailSenderImpl();
@@ -104,13 +104,13 @@ public class RayServiceImpl implements IRayService {
     	        message.setFrom("noreply@stockController.com");
     	        message.setTo("admin@consommi.tn"); 
     	        message.setSubject("Stock Alert"); 
-    	        message.setText("The stock of"+prod.getLabel()+" will run out soon");
+    	        message.setText("The stock of ["+prod.getLabel()+"] will run out soon");
     	        
     	        //Send the mail
     	        mailsender.send(message);
     		}
         }else {
-        	l.error("This requested quantity is not available in the store \n" + qut);
+        	System.out.print("This requested quantity is not available in the store \n" + qut);
         }
 		
 		

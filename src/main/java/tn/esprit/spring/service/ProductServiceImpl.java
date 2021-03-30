@@ -1,12 +1,35 @@
 package tn.esprit.spring.service;
 
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import tn.esprit.spring.entities.Category;
+import tn.esprit.spring.entities.EmailCfg;
 import tn.esprit.spring.entities.Product;
+import tn.esprit.spring.repository.CategoryRepository;
 import tn.esprit.spring.repository.ProductRepository;
 
 @Service
@@ -14,7 +37,45 @@ public class ProductServiceImpl implements IProductService{
 	
 	@Autowired
 	ProductRepository ProductRepository;
+	@Autowired
+	CategoryRepository categoryRepository;
+	
+	
+	
+	private EmailCfg emailCfg;
+	
+	
+	public ProductServiceImpl(EmailCfg emailCfg) {
+		this.emailCfg = emailCfg;
+	}
+	
+	/**********************Test Method***************/
+
+	@Override
+	public int checkExpirationDate(Product p) {
+
+		int ok=0;
+		Date date = new Date();
+		long y = (p.getExpirationDate().getYear()- date.getYear());
+		long m = (p.getExpirationDate().getMonth()- date.getMonth());
+		long d = (p.getExpirationDate().getDay()- date.getDay());
+		String str = Long.toString(y);
+		//System.out.print(str+" year ");
+		str= str.concat(Long.toString(m));
+		//System.out.print(str+" months ");
+		str = str.concat(Long.toString(d));
+		/*System.out.print(str+"  ");
+		System.out.println(p.getLabel()+" : "+str.compareTo("004"));*/
+		ok=str.compareTo("004");
+		
+			
+		
+		return ok;
+		
+	}
+	
 	/**********************Creating add method that insert product into database***************/
+
 	@Override
 	public int addProduct(Product p) {
 		/*Product p=new Product();
@@ -33,7 +94,24 @@ public class ProductServiceImpl implements IProductService{
 		p.setDescription(description);
 		p.setWeight(weight);
 		p.setBarCode(barCode);*/
-		ProductRepository.save(p);
+try {
+			
+			String path = "C:\\Barecode\\barecode.jpg";
+			
+			BufferedImage bf = ImageIO.read(new FileInputStream(path));
+			
+			BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(
+					new BufferedImageLuminanceSource(bf)));
+			
+			Result result = new MultiFormatReader().decode(bitmap);
+			
+			System.out.println(result.getText());
+			p.setBarCode(result.getText());
+			ProductRepository.save(p);
+		} catch(Exception e) {
+			System.out.println("Error while reading barcode " + e.getMessage());
+		}
+		
 		return p.getId();
 	}
 	/****************Creating update method that upgrade product from database*****************/ 
@@ -59,14 +137,79 @@ public class ProductServiceImpl implements IProductService{
 	}
 	/***************Creating getAll method that retrieve all product from database **************/
     @Override
-	public List<Product> getAllProducts() {
+	public List<Product> getAllProducts(String keyword) {
+		/*List<Product>getProducts = (List<Product>) ProductRepository.findAll();
+		for(Product p : getProducts) {
+			
+			if(checkExpirationDate(p)<0) {
+				//Create Email Sender
+    			JavaMailSenderImpl mailsender = new JavaMailSenderImpl();
+    			mailsender.setHost(this.emailCfg.getHost());
+    			mailsender.setPort(this.emailCfg.getPort());
+    			mailsender.setUsername(this.emailCfg.getUsername());
+    			mailsender.setPassword(this.emailCfg.getPassword());
+    			
+    			//Create Email instance
+    			SimpleMailMessage message = new SimpleMailMessage(); 
+    	        message.setFrom("noreply@stockController.com");
+    	        message.setTo("admin@consommi.tn"); 
+    	        message.setSubject("Product Alert"); 
+    	        message.setText("The Product ["+p.getLabel()+"]  will expire in "+p.getExpirationDate());
+    	        
+    	        //Send the mail
+    	        mailsender.send(message);
+			}
+		}*/
+		if (keyword!= null) {
+			for(Product n : ProductRepository.findAll(keyword)) {
+				System.out.println("Before");
+				Category cat = categoryRepository.findById(findCategoryByProduct(n.getId())).get();
+				System.out.print("categoryyyy"+cat+"  :  "+findCategoryByProduct(n.getId()));
+				cat.setPopularCat(cat.getPopularCat()+1);
+				categoryRepository.save(cat);
+			}
+			return ProductRepository.findAll(keyword);
+		}
 		return (List<Product>)ProductRepository.findAll();
+	}
+    
+    /***************Creating getAll method that retrieve all product from database **************/
+    @Override
+	public List<Product> getAllProducts(int pageNo, int pageSize) {
+		/*List<Product>getProducts = (List<Product>) ProductRepository.findAll();
+		for(Product p : getProducts) {
+			
+			if(checkExpirationDate(p)<0) {
+				//Create Email Sender
+    			JavaMailSenderImpl mailsender = new JavaMailSenderImpl();
+    			mailsender.setHost(this.emailCfg.getHost());
+    			mailsender.setPort(this.emailCfg.getPort());
+    			mailsender.setUsername(this.emailCfg.getUsername());
+    			mailsender.setPassword(this.emailCfg.getPassword());
+    			
+    			//Create Email instance
+    			SimpleMailMessage message = new SimpleMailMessage(); 
+    	        message.setFrom("noreply@stockController.com");
+    	        message.setTo("admin@consommi.tn"); 
+    	        message.setSubject("Product Alert"); 
+    	        message.setText("The Product ["+p.getLabel()+"]  will expire in "+p.getExpirationDate());
+    	        
+    	        //Send the mail
+    	        mailsender.send(message);
+			}
+		}*/
+		Pageable paging=PageRequest.of(pageNo, pageSize) ;
+		Page<Product> pagedResult = ProductRepository.findAll(paging);
+		return pagedResult.toList();
+		
+		//return (List<Product>)ProductRepository.findAll();
 	}
     /**************Creating getByid method that retrieve product detail from database************/
 	@Override
 	public Product getProductById(int id) {
 		return ProductRepository.findById(id).get();  
 	}
+	
 	/***************Creating getAll product by category method from database **************/
 	@Override
 	public List<Product>getProductsByCategory(String categoryName) {
@@ -81,6 +224,22 @@ public class ProductServiceImpl implements IProductService{
 		return productsList;
 	}
 
+	
+	@Override
+	public int findCategoryByProduct(int idp) {
+		
+		Product prod = ProductRepository.findById(idp).get();
+		
+		
+ 	return prod.getCat().getId() ;
+	}
+
+	@Override
+	public List<Product> getAllProductsByPopularity() {
+		return ProductRepository.findSortedByCat();
+	}
+	
+	
 
 
 }

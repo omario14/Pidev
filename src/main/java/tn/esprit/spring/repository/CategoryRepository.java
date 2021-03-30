@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import tn.esprit.spring.entities.Category;
 
+
 public interface CategoryRepository extends CrudRepository<Category, Integer> {
 
 	/**********************************Update category ***************************/
@@ -19,4 +20,5 @@ public interface CategoryRepository extends CrudRepository<Category, Integer> {
 	/**********************************Find category ByName***************************/
 	@Query("SELECT cat from Category cat WHERE cat.labelCat =:name")
 	public Category findCategoryByName(@Param("name")String name);
+	
 }

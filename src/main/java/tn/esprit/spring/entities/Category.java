@@ -21,6 +21,7 @@ public class Category implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String labelCat;
+	private long popularCat;
 	
 	@OneToMany(mappedBy="cat")
 	private List<Product> products;
@@ -35,9 +36,10 @@ public class Category implements Serializable{
 		
 	}
 
-	public Category(String labelCat) {
+	public Category(String labelCat,long popularCat) {
 		super();
 		this.labelCat = labelCat;
+		this.popularCat = popularCat;
 	}
 
 	public int getId() {
@@ -74,6 +76,14 @@ public class Category implements Serializable{
 
 	public void setPubs(List<Publicity> pubs) {
 		this.pubs = pubs;
+	}
+
+	public long getPopularCat() {
+		return popularCat;
+	}
+
+	public void setPopularCat(long popularCat) {
+		this.popularCat = popularCat;
 	}
 
 

@@ -14,6 +14,7 @@ public interface ICategoryService {
 	public List<Category> retrieveAllCategories();
 	public Category retrieveCategoryById (int id);
 	public Category findCategoryByName(String name);
+	
 	public void affecterCategoryProduct(int idp,int idc);
 
 }

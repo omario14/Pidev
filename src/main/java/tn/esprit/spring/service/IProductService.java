@@ -17,14 +17,23 @@ public interface IProductService {
 
 	/*******************Creating deleting method that remove product by id  from database*********/
 	int deleteProduct(int idProduct);
-
+	
 	/***************Creating getAll method that retrieve all product from database **************/
-	List<Product> getAllProducts();
+	List<Product> getAllProducts(String keyword);
 
 	/**************Creating getByid method that retrieve product detail from database************/
 	Product getProductById(int id);
 
 	/***************Creating getAll product by category method from database **************/
 	List<Product> getProductsByCategory(String categoryName);
+	
+	int checkExpirationDate(Product p) ;
+
+	/***************Creating getAll method that retrieve all product from database **************/
+	List<Product> getAllProducts(int pageNo, int pageSize);
+	
+	public int findCategoryByProduct(int idp);
+	
+	List<Product> getAllProductsByPopularity();
 
 }
