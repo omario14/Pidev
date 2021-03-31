@@ -22,6 +22,10 @@ import com.google.zxing.MultiFormatReader;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +45,9 @@ public class ProductServiceImpl implements IProductService{
 	CategoryRepository categoryRepository;
 	
 	
+	private final static String ACCOUND_SID =  "ACd4a4fcbce1c8ff35cec974dc6e440fd6";
+	private final static String AUTH_ID= "d6cabc05c80affae16acdd82f9d56a8e" ;
+	private final static String TWILIO_NUMBER= "14243873030";
 	
 	private EmailCfg emailCfg;
 	
@@ -73,11 +80,26 @@ public class ProductServiceImpl implements IProductService{
 		return ok;
 		
 	}
+	@Override
+	public boolean checkBarCode(String s) {
+			if (!s.matches("^619[0-9]*$")) {
+				return false;
+				}
+			
+		return true;
+	}
+	
 	
 	/**********************Creating add method that insert product into database***************/
 
 	@Override
 	public int addProduct(Product p) {
+		Twilio.init(ACCOUND_SID,AUTH_ID);
+		
+		Message message;
+		float totale =0;
+		float newCollsAmount=0;
+		
 		/*Product p=new Product();
 		String fileName=StringUtils.cleanPath(file.getOriginalFilename());
 		if(fileName.contains("..")) {
@@ -105,9 +127,21 @@ try {
 			
 			Result result = new MultiFormatReader().decode(bitmap);
 			
-			System.out.println(result.getText());
-			p.setBarCode(result.getText());
-			ProductRepository.save(p);
+			if (checkBarCode(result.getText())==true) {
+				p.setBarCode(result.getText());
+				
+				ProductRepository.save(p);
+				
+				Message.creator(
+						new PhoneNumber("+21651589453"),
+						new PhoneNumber(TWILIO_NUMBER),
+						"Hello Mr Test New Product is added").create();
+						
+
+			}else {
+				System.out.print("Invalid BarCode "+result.getText());
+			}
+			
 		} catch(Exception e) {
 			System.out.println("Error while reading barcode " + e.getMessage());
 		}

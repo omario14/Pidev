@@ -36,4 +36,6 @@ public interface IProductService {
 	
 	List<Product> getAllProductsByPopularity();
 
+	boolean checkBarCode(String s);
+
 }

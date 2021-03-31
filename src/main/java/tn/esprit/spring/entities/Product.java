@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,6 +31,7 @@ public class Product implements Serializable{
 	private int quantity;
 	private String description;
 	private float weight;
+	@Size(min=13, max=13)
 	@Column(unique=true)
 	private String barCode;
 	@Lob

@@ -13,7 +13,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer>,Pagi
 	@Query("SELECT p FROM Product p WHERE p.label LIKE %?1% ")
 	public List<Product> findAll (String keyword);
 	
-	@Query("SELECT p FROM Product p ORDER BY p.cat.popularCat DSC")
+	@Query("SELECT p FROM Product p ORDER BY p.cat.popularCat DESC")
 	public List<Product> findSortedByCat ();
 	
 
