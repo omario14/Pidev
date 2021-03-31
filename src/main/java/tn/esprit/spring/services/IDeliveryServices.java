@@ -16,8 +16,11 @@ public interface IDeliveryServices {
 	void deleteDelivery(int  id);
 
 	public String passerLivraison(Orders order);
-	public void affecterLivraisonALivreur(int idLivreur,int idDelivery);
+	//public void affecterLivraisonALivreur(int idLivreur,int idDelivery);
 	public String geocode(String address);
 	//public void affecterLivraisonALivreur(DeliveryMan Livreur);
+	public void setArrived(int deleveryID);
+	public Delivery getById(int id);
+	public DeliveryMan AffectDeliveryToNearesDeliveyMen(int deliveryId);
 }
 

@@ -44,4 +44,9 @@ public class DeliveryManControllers {
 		return dservice.updateDeliveryMan(d);
 	}
 
+	@GetMapping("/getActivDeliveryMen")
+	public List <DeliveryMan> getActivDeliveryMen(){
+	List <DeliveryMan> Dlist = dservice.getActiveDeliveryMen();
+		return Dlist;
+		}
 }

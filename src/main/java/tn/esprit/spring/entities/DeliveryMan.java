@@ -11,9 +11,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class DeliveryMan {
-	public enum StateLivreur {
-		Active, InActive;
-	}
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,21 +26,19 @@ public class DeliveryMan {
 	private float salary;
 	private int deliveryNbre;
 	
-	private StateLivreur stateLivreur;
+
+	private String Lattitude ;
+	private String Longitude;
 	
-	@OneToMany(mappedBy="delMan")
+	private Boolean stateLivreur;
+	
+	@OneToMany
 	private List<Delivery> deliveries;
 	
 	
 	
 
-	public StateLivreur getStateLivreur() {
-		return stateLivreur;
-	}
-
-	public void setStateLivreur(StateLivreur stateLivreur) {
-		this.stateLivreur = stateLivreur;
-	}
+	
 
 	public int getId() {
 		return id;
@@ -114,6 +110,30 @@ public class DeliveryMan {
 
 	public void setDeliveries(List<Delivery> deliveries) {
 		this.deliveries = deliveries;
+	}
+
+	public String getLattitude() {
+		return Lattitude;
+	}
+
+	public void setLattitude(String lattitude) {
+		Lattitude = lattitude;
+	}
+
+	public String getLongitude() {
+		return Longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		Longitude = longitude;
+	}
+
+	public Boolean getStateLivreur() {
+		return stateLivreur;
+	}
+
+	public void setStateLivreur(Boolean stateLivreur) {
+		this.stateLivreur = stateLivreur;
 	}
 
 	

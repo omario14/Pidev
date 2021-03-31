@@ -14,6 +14,8 @@ DeliveryManRepository drepository;
 
 	@Override
 	public DeliveryMan addDeliveryMan(DeliveryMan D) {
+		D.setLattitude(D.getLattitude());
+		D.setLongitude(D.getLongitude());
 		
 		return drepository.save(D);
 	}
@@ -34,6 +36,12 @@ DeliveryManRepository drepository;
 	public List<DeliveryMan> getDeliveryMen() {
 		
 		return (List<DeliveryMan>) drepository.findAll();
+	}
+
+	@Override
+	public List<DeliveryMan> getActiveDeliveryMen() {
+		// TODO Auto-generated method stub
+		return drepository.getByStateLivreurTrue();
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ public class Delivery {
 	
 	public enum StateDelivery {
 		IN_PROGRESS, 
-		Approved;
+		Approved,Arrived
 	}
 	
 	@Id
@@ -26,14 +27,11 @@ public class Delivery {
 	private float price;
 	@Temporal(TemporalType.DATE)
 	private Date dateDel;
-	private String address ;
+	private String address;
+	private String Lattitude ;
+	private String Longitude;
 	
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	@Enumerated
 	private StateDelivery etat;
 	
 	
@@ -44,6 +42,18 @@ public class Delivery {
 	@ManyToOne
 	private DeliveryMan delMan;
 	
+	public String getLattitude() {
+		return Lattitude;
+	}
+	public void setLattitude(String lattitude) {
+		Lattitude = lattitude;
+	}
+	public String getLongitude() {
+		return Longitude;
+	}
+	public void setLongitude(String longitude) {
+		Longitude = longitude;
+	}
 	public int getId() {
 		return id;
 	}
@@ -89,6 +99,12 @@ public class Delivery {
 	}
 	public void setDelMan(DeliveryMan delMan) {
 		this.delMan = delMan;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	
