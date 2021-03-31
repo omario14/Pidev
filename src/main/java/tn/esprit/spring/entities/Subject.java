@@ -15,9 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
-public class Subject implements Serializable {
+public class Subject {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,6 +29,7 @@ public class Subject implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	private Integer voteCount = 0;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;

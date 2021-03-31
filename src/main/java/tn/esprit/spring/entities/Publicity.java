@@ -3,6 +3,8 @@ package tn.esprit.spring.entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,9 +25,29 @@ public class Publicity {
 	private Date dateFin;
 	private String canal;
 	private String image;
+	@Enumerated(EnumType.STRING)
+	private Generation generation;
 	
 	@ManyToOne
 	private Category cat;
+	
+	
+
+	public Publicity() {
+		super();
+	}
+
+	public Publicity(int id, String name, Date dateDebut, Date dateFin, String canal, String image, Category cat, Generation generation) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.canal = canal;
+		this.image = image;
+		this.generation = generation;
+		this.cat = cat;
+	}
 
 	public int getId() {
 		return id;
@@ -73,6 +95,15 @@ public class Publicity {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	
+	public Generation getGeneration() {
+		return generation;
+	}
+
+	public void setGeneration(Generation generation) {
+		this.generation = generation;
 	}
 
 	public Category getCat() {

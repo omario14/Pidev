@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.common.AuthenticationFailException;
 import tn.esprit.spring.entities.Subject;
+import tn.esprit.spring.service.AuthenticationService;
 import tn.esprit.spring.service.SubjectService;
 
 @RestController
@@ -25,24 +28,22 @@ public class SubjectController {
 	
 	@Autowired
 	SubjectService subjectService;
+	@Autowired
+    AuthenticationService authenticationService;
 
 	@PostMapping("/addsub")
-	public int ajouterSubject(@RequestBody Subject s) {
-		return subjectService.ajouterSubject(s);
+	public void ajouterSubject(@RequestBody Subject s, @RequestParam("token") String token) throws AuthenticationFailException{
+		authenticationService.authenticate(token);
+		int idUser = authenticationService.getUser(token).getId();
+		subjectService.ajouterSubject(s, idUser);
 	}
 	
-	@PutMapping(value = "/affecterCommentASubject/{idcom}/{idsub}")
-	public void affecterCommentASubject(@PathVariable("idcom") int commentId, @PathVariable("idsub") int subjectId) {
-		subjectService.affecterCommentASubject(commentId, subjectId);
-		//employeService.affecterEmployeADepartement(employeId, depId);
-
-	}
-	
-	@GetMapping("/getAllSubjects")
+	@GetMapping("/getSubjects")
   	@ResponseBody
-  	public List<Subject>  getAllSubjects() {
+  	public List<Subject>  getSubjects(@RequestParam("token") String token) throws AuthenticationFailException {
+		authenticationService.authenticate(token);
   		List<Subject> subjects = new ArrayList<>();
-  		for(Subject s : subjectService.retrieveAllSubjects()) {
+  		for(Subject s : subjectService.retrieveSubjects()) {
   			subjects.add(s);
   		}
   		return subjects;
@@ -50,9 +51,11 @@ public class SubjectController {
 	
 	@DeleteMapping("/deleteSubject/{idSubject}")
   	@ResponseBody
-  	public ResponseEntity<String>  deleteSubject(
-  		@RequestBody Subject subject,@PathVariable("idSubject")int idSubject) {
-		subjectService.deleteSubject(idSubject);
+  	public ResponseEntity<String>  deleteSubject (
+  		@RequestBody Subject subject,@PathVariable("idSubject")int idSubject, @RequestParam("token") String token) throws AuthenticationFailException {
+		authenticationService.authenticate(token);
+		int idUser = authenticationService.getUser(token).getId();
+		subjectService.deleteSubject(idSubject, idUser);
   	    return new ResponseEntity<String>("Subject deleted successfully",HttpStatus.ACCEPTED);
   		
   	}
@@ -60,8 +63,10 @@ public class SubjectController {
 	@PutMapping("/updateSubject/{idSubject}")
   	@ResponseBody
   	public ResponseEntity<String> updateSubject(
-  		@RequestBody Subject subject,@PathVariable("idSubject")int idSubject) {
-		subjectService.updateSubject(subject, idSubject);
+  		@RequestBody Subject subject,@PathVariable("idSubject")int idSubject, @RequestParam("token") String token) throws AuthenticationFailException {
+		authenticationService.authenticate(token);
+		int idUser = authenticationService.getUser(token).getId();
+		subjectService.updateSubject(subject, idSubject, idUser);
   	    return new ResponseEntity<String>("Subject updated successfully",HttpStatus.OK);
   	}
 	

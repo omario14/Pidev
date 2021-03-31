@@ -4,6 +4,8 @@ package tn.esprit.spring.entities;
 
 import java.util.Arrays;
 
+import tn.esprit.spring.exception.SpringVoteException;
+
 public enum VoteType {
     UPVOTE(1), DOWNVOTE(-1),
     ;
